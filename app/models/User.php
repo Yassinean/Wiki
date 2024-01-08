@@ -1,4 +1,5 @@
-<?php 
+<?php
+require '../config/Config.php';
 class User{
     private $idUser;
     private $prenom ;
@@ -6,9 +7,10 @@ class User{
     private $email;
     private $password;
     private $role;
+    private $db;
 
 public function __construct(){
-
+    $this->db = Config::getInstance();
 }
 
 public function getNom(){
@@ -50,16 +52,13 @@ public function setRole($role) {
     $this->role = $role;
 }
 
-public function insertUser(){
-    $sql = Config::connect()->prepare
-    ("INSERT INTO users (nom ,prenom,email,password,role)
-     values(:nom,:prenom,:email,:password,:Role)");
-      $sql->bindParam(':nom', $this->nom);
-      $sql->bindParam(':prenom', $this->email);
-      $sql->bindParam(':email', $this->password);
-      $sql->bindParam(':password', $this->prenom);
-      $sql->bindParam(':Role', $this->role);
-      $sql->execute();
+public function insertUser($data){
+    $this->db->query("INSERT INTO users (nom ,prenom,email,password) values(:nom,:prenom,:email,:password)");
+      $this->db->bind(':nom',$data['nom']);
+      $this->db->bind(':prenom', $data['prenom']);
+      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':password', $data['password']);
+      $this->db->execute();
 }
 
 }
