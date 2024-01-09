@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
 
-    $user = new User($db);
+    $user = new User($name, $email, $password,$db);
 
     $user->__set('name',$name);
     $user->__set('email',$email);

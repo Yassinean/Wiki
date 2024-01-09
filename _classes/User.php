@@ -8,14 +8,14 @@ class User
     private $name;
     private $email;
     private $password;
-    private $role;
-    private $db;
+    private $role="auteur";
 
-    public function __construct($name,$email,$password)
+    public function __construct($name,$email,$password,$db)
     {
         $this->name= $name;
         $this->email = $email;
         $this->password = $password;
+        $this->db = $db;
     }
 
     public function __get($property)
@@ -36,27 +36,30 @@ class User
         $stmt->bind_param("ssss", $this->name, $this->email, $this->password, $this->role);
         $stmt->execute();
     }
-    public function afficheUser()
+    static function login($email, $password)
     {
-
         global $db;
-        if (empty($this->name) || empty($password)) {
-            header("Location: ../pages/index.php?error=emptyfields");
-            exit();
-        } else {
-            $req = "SELECT * FROM users";
-            $stmt = $this->db->prepare($req);
-            $stmt->execute();
-            if (!mysqli_stmt_prepare($stmt, $req)) {
-                header("Location: ../pages/index.php?error=sqlerror");
-                exit();
+        $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->bind_result($userId, $name, $hashedPass, $role);
+        $stmt->fetch();
+        $stmt->close();
+
+        if (password_verify($password, $hashedPass)) {
+            $_SESSION["id"] = $userId;
+            $_SESSION["name"] = $name;
+            $_SESSION["role"] = $role;
+
+            if ($role == 'admin') {
+                header("Location: index.php?page=dashboard");
+                exit;
             } else {
-                mysqli_stmt_bind_param($stmt, "s", $this->name);
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-                $row = mysqli_fetch_assoc($result);
-                header('index.php?page=home');
+                header("Location: index.php?page=home");
+                exit;
             }
+        } else {
+            echo "Invalid email or password.";
         }
     }
 }

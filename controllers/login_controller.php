@@ -1,15 +1,16 @@
 <?php
 
 if (isset($_POST['submit'])) {
+    $email = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $user = new User($db);
+    $user = new User($name,$email,$password,$db);
 
     $user->__get('email');
     $user->__get('password');
 
-    $user->afficheUser();
+    $user->login($email,$password);
 
 
     // if ($user != false) {
