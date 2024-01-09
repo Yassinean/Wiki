@@ -14,22 +14,25 @@ class User {
         $this->db = $dbConn;
     }
 
-    // public function __get($property){
-    //     return $this->property;
-    // }
+    public function __get($property){
+        return $this->$property;
+    }
 
-    // public function __set($property, $value){
-    //     $this->property = $value;
-    // }
+    public function __set($property, $value){
+        $this->$property = $value;
+    }
     
     public function insertUser(){
         global $db;
-        $req = "INSERT INTO users(name, email, password, role) VALUES (':name', ':email', ':password', ':role') ";
+        $req = "INSERT INTO users(name, email, password, role) VALUES ( ?, ?, ?, ?) ";
         $stmt = $this->db->prepare($req);
-        $stmt->bind(":name", $this->name);
-        $stmt->bind(":email", $this->email);
-        $stmt->bind(":password", $this->password);
-        $stmt->bind(":role",$this->role);
+        $stmt->bind_param("ssss", $this->name,$this->email, $this->password,$this->role );
+        $stmt->execute();
+    }
+    public function afficheUser(){
+        global $db;
+        $req = "SELECT * FROM users";
+        $stmt = $this->db->prepare($req);
         $stmt->execute();
     }
 }
