@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- component -->
     <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+    <!-- Add this in your HTML file, preferably in the head section -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <title><?= ucfirst($page) ?></title>

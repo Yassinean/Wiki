@@ -1,4 +1,15 @@
 <!-- component -->
+<?php
+$wiki = new Admin();
+$wiki->getWikis();
+$auteur = new Admin();
+$auteur->getAuteurs();
+$tag = new Admin();
+$tag->getTags();
+$categ = new Admin();
+$categ->getCategories();
+
+?>
 
 <head>
     <meta charset="UTF-8" />
@@ -8,7 +19,7 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- componen for modalt -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/@themesberg /flowbite@1.2.0/dist/flowbite.min.css" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/@themesberg /flowbite@1.2.0/dist/flowbite.min.css" />
 
 </head>
 
@@ -95,7 +106,7 @@
                     <p class="text-2xl text-white">
                         Wikis
                     </p>
-                    <p>1805</p>
+                    <p class="text-white"><?= $wiki->getCount(); ?></p>
                 </div>
                 <div class="flex flex-col items-center justify-center h-32 rounded bg-blue-50 dark:bg-blue-800">
                     <svg class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-white group-hover:text-white dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
@@ -104,7 +115,7 @@
                     <p class="text-2xl text-white">
                         Auteur
                     </p>
-                    <p>1805</p>
+                    <p class="text-white"><?= $auteur->getCount(); ?></p>
                 </div>
                 <div class="flex flex-col items-center justify-center h-32 rounded bg-blue-50 dark:bg-blue-800">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -113,7 +124,7 @@
                     <p class="text-2xl text-white">
                         Tags
                     </p>
-                    <p>1805</p>
+                    <p class="text-white"><?= $tag->getCount(); ?></p>
                 </div>
                 <div class="flex flex-col items-center justify-center h-32 rounded bg-blue-50 dark:bg-blue-800">
                     <svg class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-white group-hover:text-white dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
@@ -122,15 +133,8 @@
                     <p class="text-2xl text-white">
                         Categories
                     </p>
-                    <p>1805</p>
+                    <p class="text-white"><?= $categ->getCount(); ?></p>
                 </div>
-            </div>
-            <div class="flex flex-col items-center justify-center h-24 rounded bg-blue-50 dark:bg-blue-800">
-                <p class="text-2xl text-white dark:text-gray-500">
-                    <svg class="w-3.5 h-3.5" testaria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                    </svg>
-                </p>
             </div>
         </div>
         <div id="wiki"></div>
