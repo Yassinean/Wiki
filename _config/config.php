@@ -32,3 +32,11 @@ try {
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
+
+
+ini_set('session.cookie_lifetime', false);
+session_start();
+
+define('PATH_REQUIRE', substr($_SERVER['SCRIPT_FILENAME'], 0, -9)); // inclusion php
+define('PATH', substr($_SERVER['PHP_SELF'], 0, -9)); // pour les images et les fichiers
+define('__ROOT__', dirname(dirname(__FILE__)));

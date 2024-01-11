@@ -80,7 +80,6 @@ class User
         $stmt->bindParam(":email", $email);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION["id"] = $user['id'];
             $_SESSION["name"] = $user['name'];
