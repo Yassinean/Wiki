@@ -55,12 +55,6 @@ if (isset($_POST['logout'])) {
                 <li>
                     <a href="index.php?page=home" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0 md:dark:text-white" aria-current="page">Home</a>
                 </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-white md:p-0 md:dark:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-white md:p-0 dark:text-white md:dark:hover:text-blue-700 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                </li>
                 <?php if (isset($_SESSION['id'])) : ?>
                     <form action="" method="post">
                         <li>
@@ -138,6 +132,7 @@ if (isset($_POST['logout'])) {
     </div>
     <!-- modal end -->
     <div id="resultat">
+        <h1 class="text-center text-4xl mt-4">Wiki Récent</h1>
         <div class="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
             <a rel="noopener noreferrer" href="index.php?page=single" class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900">
                 <img src="https://source.unsplash.com/random/480x360" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
@@ -201,31 +196,5 @@ if (isset($_POST['logout'])) {
     </div>
     <!-- this script for search -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#live_search").keyup(function() {
-                var input = $(this).val();
-                //alert(input);
-                if (input != "") {
-                    $.ajax({
-                        url: "search.php",
-                        method: "POST",
-                        data: {
-                            input: input
-                        },
-                        success: function(data) {
-                            $("#resultat").html(data);
-                            $("#resultat").css("display", "block");
-                        }
-                    });
-                } else {
-
-                    $("#resultat").html("");
-                    $("#resultat").css("display", "none");
-                }
-            });
-        });
-    </script>
     <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
 </section>

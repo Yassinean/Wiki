@@ -66,7 +66,6 @@ class Admin
         $sql = db::connect()->prepare("SELECT count(*) as nbr FROM categories");
         $sql->execute();
         $categories = $sql->fetch(PDO::FETCH_ASSOC);
-        $nbr = $categories['nbr'];
         // die();
         $count = $this->setCount($categories['nbr']);
         return $count;;
@@ -76,17 +75,15 @@ class Admin
         $sql = db::connect()->prepare("SELECT count(*) as nbr FROM users where role = 'auteur' ");
         $sql->execute();
         $auteurs = $sql->fetch(PDO::FETCH_ASSOC);
-        $nbr = $auteurs['nbr'];
         // die();
         $count = $this->setCount($auteurs['nbr']);
         return $count;
-        }
+    }
     public function getTags()
     {
         $sql = db::connect()->prepare("SELECT count(*) as nbr FROM tags");
         $sql->execute();
         $tags = $sql->fetch(PDO::FETCH_ASSOC);
-        $nbr = $tags['nbr'];
         // die();
         $count = $this->setCount($tags['nbr']);
         return $count;
@@ -100,5 +97,12 @@ class Admin
         // die();
         $count = $this->setCount($wikis['nbr']);
         return $count;
+    }
+    public function afficheWikis()
+    {
+        $sql = db::connect()->prepare("SELECT * FROM wikis");
+        $sql->execute();
+        $wikis = $sql->fetch(PDO::FETCH_ASSOC);
+        return $wikis;
     }
 }
