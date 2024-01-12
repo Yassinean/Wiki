@@ -33,6 +33,13 @@ class Wiki
         return $stmt->execute();
     }
 
+    public function auteurWiki(){
+        $stmt = db::connect()->prepare("SELECT users.name from wikis JOIN users ON users.id = wikis.auteur_id");
+        $stmt->execute();
+        $auteur = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $auteur;
+    }
+
     public function updateWiki($id)
     {
         $stmt = db::connect()->prepare("UPDATE Wikis SET title = :title, content = :content, categorie_id = :categorie_id, img = :img WHERE id = :id");

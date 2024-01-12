@@ -79,6 +79,14 @@ class Admin
         $count = $this->setCount($auteurs['nbr']);
         return $count;
     }
+    public function afficheAuteurs()
+    {
+        $sql = db::connect()->prepare("SELECT * FROM users where role = 'auteur' ");
+        $sql->execute();
+        $auteurs = $sql->fetch(PDO::FETCH_ASSOC);
+        // die();
+        return $auteurs;
+    }
     public function getTags()
     {
         $sql = db::connect()->prepare("SELECT count(*) as nbr FROM tags");

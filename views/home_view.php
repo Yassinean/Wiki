@@ -72,7 +72,7 @@ if (isset($_POST['logout'])) {
         </div>
     </div>
 </nav>
-<section class="dark:bg-gray-800 dark:text-gray-100 relative">
+<section>
     <?php if (isset($_SESSION['id'])) { ?>
         <!-- Modal toggle -->
         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="fixed top-[10%] left-8 block text-white bg-blue-700 mx-auto hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
@@ -135,7 +135,7 @@ if (isset($_POST['logout'])) {
     <!-- modal end -->
 
 
-    <div class="grid grid-cols-2 justify-center items-center">
+    <div class="grid grid-cols-3 gap-12 ml-12">
         <?php foreach ($categ->getCategories() as $categ) : ?>
             <!-- component -->
             <div class="relative mt-6 flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
@@ -146,84 +146,17 @@ if (isset($_POST['logout'])) {
                     <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased"><?= $categ['description']; ?></p>
                 </div>
                 <div class="p-6 pt-0">
-                    <form action="index.php?page=wiki">
+                    <a class="!font-medium !text-blue-gray-900 !transition-colors hover:!text-pink-500" href="index.php?page=wiki">
                         <button class="flex select-none items-center gap-2 rounded-lg py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-dark="true">
                             Learn More
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
                             </svg>
                         </button>
-                    </form>
+                    </a>
                 </div>
             </div>
         <?php endforeach ?>
-    </div>
-
-    <div id="resultat">
-        <h1 class="text-center text-4xl mt-4">Wiki Récent</h1>
-        <div class="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
-            <?php foreach ($wikis->afficheWikis() as $wiki) : ?>
-                <a rel="noopener noreferrer" href="index.php?page=single" class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900">
-                    <!-- Adjust the content based on your database columns -->
-                    <img src="<?= $wiki['imageWiki']; ?>" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
-                    <div class="p-6 space-y-2 lg:col-span-5">
-                        <p class="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline"><?php var_dump($wiki['title']); ?></p>
-                        <span class="text-xs dark:text-gray-400"><?= $wiki['date_created']; ?></span>
-                        <p><?= $wiki['content']; ?></p>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-            <div class="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900">
-                    <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?1">
-                    <div class="p-6 space-y-2">
-                        <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">In usu laoreet repudiare legendos</h3>
-                        <span class="text-xs dark:text-gray-400">January 21, 2021</span>
-                        <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
-                    </div>
-                </a>
-                <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900">
-                    <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?2">
-                    <div class="p-6 space-y-2">
-                        <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">In usu laoreet repudiare legendos</h3>
-                        <span class="text-xs dark:text-gray-400">January 22, 2021</span>
-                        <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
-                    </div>
-                </a>
-                <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900">
-                    <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?3">
-                    <div class="p-6 space-y-2">
-                        <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">In usu laoreet repudiare legendos</h3>
-                        <span class="text-xs dark:text-gray-400">January 23, 2021</span>
-                        <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
-                    </div>
-                </a>
-                <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 hidden sm:block">
-                    <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?4">
-                    <div class="p-6 space-y-2">
-                        <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">In usu laoreet repudiare legendos</h3>
-                        <span class="text-xs dark:text-gray-400">January 24, 2021</span>
-                        <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
-                    </div>
-                </a>
-                <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 hidden sm:block">
-                    <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?5">
-                    <div class="p-6 space-y-2">
-                        <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">In usu laoreet repudiare legendos</h3>
-                        <span class="text-xs dark:text-gray-400">January 25, 2021</span>
-                        <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
-                    </div>
-                </a>
-                <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 hidden sm:block">
-                    <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?6">
-                    <div class="p-6 space-y-2">
-                        <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">In usu laoreet repudiare legendos</h3>
-                        <span class="text-xs dark:text-gray-400">January 26, 2021</span>
-                        <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
-                    </div>
-                </a>
-            </div> ->
-        </div>
     </div>
 
     <!-- this script for search -->
