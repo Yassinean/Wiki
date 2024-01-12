@@ -3,6 +3,8 @@
 // echo "<pre>";
 // print_r($_SESSION);
 // echo "<pre>";
+$wikis = new Wiki();
+$categ = new Categories();
 
 if (isset($_POST['logout'])) {
     session_unset();   // Unset the session variables.
@@ -131,17 +133,46 @@ if (isset($_POST['logout'])) {
         </div>
     </div>
     <!-- modal end -->
+
+
+    <div class="grid grid-cols-2 justify-center items-center">
+        <?php foreach ($categ->getCategories() as $categ) : ?>
+            <!-- component -->
+            <div class="relative mt-6 flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+                <div class="p-6">
+                    <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                        <?= $categ['name']; ?>
+                    </h5>
+                    <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased"><?= $categ['description']; ?></p>
+                </div>
+                <div class="p-6 pt-0">
+                    <form action="index.php?page=wiki">
+                        <button class="flex select-none items-center gap-2 rounded-lg py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-dark="true">
+                            Learn More
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+
     <div id="resultat">
         <h1 class="text-center text-4xl mt-4">Wiki Récent</h1>
         <div class="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
-            <a rel="noopener noreferrer" href="index.php?page=single" class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900">
-                <img src="https://source.unsplash.com/random/480x360" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
-                <div class="p-6 space-y-2 lg:col-span-5">
-                    <h3 class="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">Noster tincidunt reprimique ad pro</h3>
-                    <span class="text-xs dark:text-gray-400">February 19, 2021</span>
-                    <p>Ei delenit sensibus liberavisse pri. Quod suscipit no nam. Est in graece fuisset, eos affert putent doctus id.</p>
-                </div>
-            </a>
+            <?php foreach ($wikis->afficheWikis() as $wiki) : ?>
+                <a rel="noopener noreferrer" href="index.php?page=single" class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900">
+                    <!-- Adjust the content based on your database columns -->
+                    <img src="<?= $wiki['imageWiki']; ?>" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
+                    <div class="p-6 space-y-2 lg:col-span-5">
+                        <p class="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline"><?php var_dump($wiki['title']); ?></p>
+                        <span class="text-xs dark:text-gray-400"><?= $wiki['date_created']; ?></span>
+                        <p><?= $wiki['content']; ?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
             <div class="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900">
                     <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="https://source.unsplash.com/random/480x360?1">
@@ -191,9 +222,10 @@ if (isset($_POST['logout'])) {
                         <p>Mei ex aliquid eleifend forensibus, quo ad dicta apeirian neglegentur, ex has tantas percipit perfecto. At per tempor albucius perfecto, ei probatus consulatu patrioque mea, ei vocent delicata indoctum pri.</p>
                     </div>
                 </a>
-            </div>
+            </div> ->
         </div>
     </div>
+
     <!-- this script for search -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
