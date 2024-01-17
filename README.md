@@ -1,7 +1,1 @@
-# Simple MVC
- 
-### Instruction
-
-### Features
-
-### Conclusion
+# WikisBrief
